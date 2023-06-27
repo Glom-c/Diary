@@ -1,5 +1,7 @@
 # Glom 的日记
 
+![railgun](images/Glom.gif)
+
 ## 起因
 
 想找一个日记软件来用，无奈求之不得，就自己写一个吧。
@@ -41,6 +43,8 @@ cargo tauri build
 长话短说:
 
 > Electron 是程序员偷懒，用户受罪的技术，我小小的内存可撑不住
+
+[差评君对 **Electron** 的吐槽](https://www.bilibili.com/video/BV1Hv4y167ST/?share_source=copy_web&vd_source=7563b285a2dac7f9845f96784dec6e6e&t=118)
 
 <br/>
 

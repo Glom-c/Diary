@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 20px;
+}
+#calendar {
+    width: 45%;
+    float: left;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}
+
+#calendar table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+#calendar td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    width: calc(100% / 7);
+}
+
+#calendar td:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    height: 0;
+    padding-top: 100%;
+}
+#calendar td:hover {
+    background-color: #f7f7f7;
+    cursor: pointer;
+}
+#calendar .current-day {
+    background-color: #e0e0e0;
+    font-weight: bold;
+}
+#today-info {
+    width: 45%;
+    float: right;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}
+
+#today-info input[type="text"],
+#today-info textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-width: 100%;
+}
+
+#date-name,
+#date-nickname {
+    max-width: 200px;
+}
+
+#daily-quote {
+    max-block-size: 20px;
+}
+
+#task-list span {
+    display: inline-block;
+    max-width: 250px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+    #calendar,
+    #today-info {
+        width: 100%;
+        float: right;
+    }
+}
+
+#today-info button {
+    padding: 5px 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#today-info button:hover {
+    background-color: #45a049;
+}
+.prev-month,
+.next-month {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.prev-month:hover,
+.next-month:hover {
+    background-color: #f2f2f2;
+}
+
+.prev-month-wrapper,
+.next-month-wrapper {
+    display: inline-block;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.delete-btn {
+    display: inline-block;
+    margin-left: 10px; /* 调整删除按钮与任务文本之间的间距 */
+    padding: 1px; /* 调整删除按钮的内边距 */
+    background-color: #f44336; /* 设置删除按钮的背景颜色 */
+    color: #fff; /* 设置删除按钮的文本颜色 */
+    cursor: pointer; /* 设置删除按钮的鼠标指针样式 */
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f; /* 设置删除按钮的鼠标悬停时的背景颜色 */
+}

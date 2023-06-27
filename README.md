@@ -1,0 +1,2 @@
+# Diary
+ A useful diary

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="styles.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Glom 日记</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="module" src="/main.js" defer></script>
+    <style>
+        .logo.vanilla:hover {
+            filter: drop-shadow(0 0 2em #ffe21c);
+        }
+    </style>
+</head>
+
+<body>
+<div id="calendar"></div>
+<div id="today-info">
+    <h2>当天信息</h2>
+    <label for="date-name">日期:</label>
+    <input type="text" id="date-name" value="2077-10-1"/>
+    <label for="date-nickname">昵称:</label>
+    <input type="text" id="date-nickname" />
+    <label for="daily-quote">每日一言:</label>
+    <textarea id="daily-quote" rows="3"></textarea>
+    <label for="task-list">任务清单:</label>
+    <ul id="task-list">
+        无
+    </ul>
+    <button id="save-btn" class="btn">保存</button>
+    <button id="add-task-btn" class="btn">添加任务</button>
+</div>
+</body>
+</html>

@@ -4,6 +4,7 @@ var todayInfo = $("#today-info");
 
 // Get current date
 var currentDate = new Date();
+var today_const = new Date();
 // Get the name of the month in Chinese
 function getMonthName(date) {
   var months = [
@@ -84,9 +85,9 @@ async function renderCalendar(date) {
         newRow.append(newDay);
         continue
       } else if (
-          currentDay === currentDate.getDate() &&
-          date.getMonth() === currentDate.getMonth() &&
-          date.getFullYear() === currentDate.getFullYear()
+          currentDay === today_const.getDate() &&
+          date.getMonth() === today_const.getMonth() &&
+          date.getFullYear() === today_const.getFullYear()
       ) {
         // Current day
         newDay.text(currentDay).addClass("current-day");

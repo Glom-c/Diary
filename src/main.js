@@ -22,7 +22,7 @@ function getMonthName(date) {
   ];
   return months[date.getMonth()];
 }
-function renderCalendar(date) {
+async function renderCalendar(date) {
   // Clear existing calendar
   calendar.empty();
 
@@ -81,6 +81,8 @@ function renderCalendar(date) {
       ) {
         // Empty cells before and after the month
         newDay.addClass("empty-cell");
+        newRow.append(newDay);
+        continue
       } else if (
           currentDay === currentDate.getDate() &&
           date.getMonth() === currentDate.getMonth() &&
@@ -88,12 +90,21 @@ function renderCalendar(date) {
       ) {
         // Current day
         newDay.text(currentDay).addClass("current-day");
-        currentDay++;
       } else if (currentDay <= numDays) {
         // Regular days
         newDay.text(currentDay);
-        currentDay++;
       }
+      const formattedDate = firstDay.getFullYear() + "-" + (firstDay.getMonth() + 1) + "-" + currentDay;
+      var is_exist = false
+      await exist(formattedDate).then((exist) => {
+        is_exist = exist
+      })
+      console.log("'" + formattedDate + "'")
+      console.log("'" + is_exist + "'")
+      if (is_exist === true) {
+        newDay.addClass("exist-day")
+      }
+      currentDay++;
       newRow.append(newDay);
     }
     table.append(newRow);
@@ -137,6 +148,9 @@ $(document).ready(() => {
     if (isNaN(day)){
       return
     }
+     save_data().then(r => {
+       console.log("Saved current data.")
+     })
     var month = currentDate.getMonth()+1;
     var year = currentDate.getFullYear();
     var formattedDate = year + "-" + month + "-" + day;
@@ -156,24 +170,28 @@ $(document).ready(() => {
 
   // Save button click event
   $("#save-btn").click(() => {
-    const date = $('#date-name').val()
-    const name = $('#date-nickname').val()
-    const words = $('#daily-quote').val()
-    var tasks = [];
-    $("#task-list li").each(function () {
-      var checkbox = $(this).find('input[type="checkbox"]');
-      var span = $(this).find("span");
-      tasks.push({
-        checked: checkbox.prop("checked"),
-        task: span.text(),
-      });
-    });
-
-    save(date,JSON.stringify({date:date,name:name,words:words,tasks:tasks}))
+    save_data()
   });
 
 
 });
+
+async function save_data(){
+  const date = $('#date-name').val()
+  const name = $('#date-nickname').val()
+  const words = $('#daily-quote').val()
+  var tasks = [];
+  $("#task-list li").each(function () {
+    var checkbox = $(this).find('input[type="checkbox"]');
+    var span = $(this).find("span");
+    tasks.push({
+      checked: checkbox.prop("checked"),
+      task: span.text(),
+    });
+  });
+
+  save(date,JSON.stringify({date:date,name:name,words:words,tasks:tasks}))
+}
 
 
 // Function to handle task deletion
@@ -270,6 +288,9 @@ async function save(date,json) {
 }
 async function load(date) {
   return  await invoke("load", { date:date});
+}
+async function exist(date) {
+  return await invoke("exist", { date:date});
 }
 
 // 反序列化JSON数据为任务清单列表

@@ -3,10 +3,11 @@
 
 use crate::data::DayData;
 use crate::date::Date;
-use serde::{Deserialize, Serialize};
 use serde_json::{Deserializer, Serializer, Value};
 use std::fs;
+use std::path::Path;
 use tauri::api::ipc::serialize_js;
+use tauri::Manager;
 
 mod data;
 mod date;
@@ -36,10 +37,18 @@ fn load(date: &str) -> String {
         "{}".to_string()
     })
 }
-
+#[tauri::command]
+fn exist(date: &str) -> bool {
+    let date = Date::from(date).to_string();
+    Path::new(&format!("data/{date}.json")).exists()
+}
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![save, load])
+        .setup(|a| {
+            a.listen_global("e", |e| {});
+            Ok(())
+        })
+        .invoke_handler(tauri::generate_handler![save, load, exist])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

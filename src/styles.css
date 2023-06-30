@@ -31,13 +31,24 @@ body {
     padding-top: 100%;
 }
 #calendar td:hover {
-    background-color: #f7f7f7;
+    background-color: mediumaquamarine;
     cursor: pointer;
 }
 #calendar .current-day {
     background-color: #e0e0e0;
     font-weight: bold;
 }
+#calendar .exist-day {
+    background-color: aquamarine;
+    font-weight: bold;
+}
+
+#calendar .current-day, .exist-day {
+    background-color: aqua;
+    font-weight: bold;
+}
+
+
 #today-info {
     width: 45%;
     float: right;

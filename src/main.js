@@ -144,23 +144,23 @@ $(document).ready(() => {
   });
 
   // Handle date click event
-  calendar.on("click", "td", function () {
+  calendar.on("click", "td", async function () {
     var day = parseInt($(this).text());
-    if (isNaN(day)){
+    if (isNaN(day)) {
       return
     }
-     save_data().then(r => {
-       console.log("Saved current data.")
-     })
-    var month = currentDate.getMonth()+1;
+    await save_data().then(r => {
+      console.log("Saved current data.")
+    })
+    var month = currentDate.getMonth() + 1;
     var year = currentDate.getFullYear();
     var formattedDate = year + "-" + month + "-" + day;
     console.log("Selected date:", formattedDate);
 
-    currentDate = new Date(year,month-1,day)
+    currentDate = new Date(year, month - 1, day)
     renderCalendar(currentDate)
     $("#date-name").val(formattedDate);
-    load(formattedDate).then((jsonStr)=>{
+    load(formattedDate).then((jsonStr) => {
       let json = JSON.parse(jsonStr)
       // Switch to today's info
       $("#date-nickname").val(json.name);
@@ -190,7 +190,9 @@ async function save_data(){
       task: span.text(),
     });
   });
-
+  if (name === "" && words === "" && tasks.length === 0){
+    return
+  }
   save(date,JSON.stringify({date:date,name:name,words:words,tasks:tasks}))
 }
 
